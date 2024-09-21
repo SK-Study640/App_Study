@@ -14,8 +14,20 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application" %>
-  </head>
 
+  </head>
+  <header>
+    <% if user_signed_in? %>
+      <p>Welcome, <%= current_user.name %>!</p>
+      <!-- Using form_with instead of link_to for logout because link_to defaults to GET, and we need DELETE for proper logout handling. -->
+      <%= form_with url: destroy_user_session_path, method: :delete,  class: "d-inline" do %>
+        <%= submit_tag "Logout" %>
+      <% end %>
+    <% else %>
+      <%= link_to "Sign up", new_user_registration_path %>
+      <%= link_to "Login", new_user_session_path %>
+    <% end %>
+  </header>
   <body>
     <%= yield %>
   </body>
