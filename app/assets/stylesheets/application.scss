@@ -1,0 +1,13 @@
+//@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* ナビゲーションバーのカスタムスタイル */
+.navbar-dark .navbar-text,
+.navbar-dark .nav-link {
+  color: #ffffff; /* 白いテキスト */
+}
+
+.navbar-dark .nav-link:hover {
+  color: #f8f9fa; /* ホバー時の明るい色 */
+}
+

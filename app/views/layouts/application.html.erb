@@ -1,34 +1,51 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= content_for(:title) || "App Study" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title><%= content_for(:title) || "App Study" %></title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= yield :head %>
+  <%= yield :head %>
 
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-    <%= stylesheet_link_tag "application" %>
-
-  </head>
-  <header>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/icon.png" type="image/png">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon.png">
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track": "reload" %>
+</head>
+<body>
+<!-- ナビゲーションバー -->
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+  <div class="container-fluid">
+    <!-- Welcomeメッセージとユーザー名を左に表示 -->
     <% if user_signed_in? %>
-      <p>Welcome, <%= current_user.name %>!</p>
-      <!-- Using form_with instead of link_to for logout because link_to defaults to GET, and we need DELETE for proper logout handling. -->
-      <%= form_with url: destroy_user_session_path, method: :delete,  class: "d-inline" do %>
-        <%= submit_tag "Logout" %>
-      <% end %>
-    <% else %>
-      <%= link_to "Sign up", new_user_registration_path %>
-      <%= link_to "Login", new_user_session_path %>
+      <span class="navbar-text text-light">Welcome, <%= current_user.name %>!</span>
     <% end %>
-  </header>
-  <body>
-    <%= yield %>
-  </body>
+
+    <!-- 右側：ログイン、サインアップ、ログアウトメニュー -->
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+      <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= form_with url: destroy_user_session_path, method: :delete, class: "d-inline" do %>
+            <button class="nav-link btn btn-link text-light" type="submit">Logout</button>
+          <% end %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to "Sign up", new_user_registration_path, class: "nav-link text-light" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Login", new_user_session_path, class: "nav-link text-light" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
+
+<!-- メインコンテンツ -->
+<%= yield %>
+
+</body>
 </html>
