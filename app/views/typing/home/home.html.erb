@@ -1,0 +1,10 @@
+<h1>Typing Results</h1>
+<div>
+  <% @results.each_with_index do |result, index| %>
+    <ul class="list-group list-group-horizontal">
+      <li class="list-group-item"><%= index + 1 %> 位</li>
+      <li class="list-group-item"><%= result.user.name %></li>
+      <li class="list-group-item"><%= result.time %> 秒</li>
+    </ul>
+  <% end %>
+</div>
