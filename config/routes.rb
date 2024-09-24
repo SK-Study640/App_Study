@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   root "home#index"
 
   namespace :typing do
-    get "home/home"
+    get "typing/home", to: "typing#home"
+    get "game/play", to: "home#play", as: :game_play
+    get "game/submit_answer", to: "home#submit_answer", as: :game_submit_answer
+    get "game/finished", to: "home#finished", as: :game_finished
   end
 end
