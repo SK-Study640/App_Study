@@ -44,4 +44,3 @@ user_names.each do |name|
     puts "User #{name} could not be created: #{user.errors.full_messages.join(", ")}"
   end
 end
-
