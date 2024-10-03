@@ -14,7 +14,6 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "home#index"
 
-  namespace :typing do
-    get "home/home"
-  end
+  get "typing/home"
+  get "typing/play"
 end

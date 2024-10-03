@@ -17,14 +17,20 @@
 </head>
 <body>
 <!-- ナビゲーションバー -->
-<nav>
-  <div>
-    <!-- Welcomeメッセージとユーザー名を左に表示 -->
+<nav class="navbar">
+  <!-- 左側の要素 -->
+  <!-- メインコンテンツ -->
+  <div class="navbar-item-left">
+    <%= link_to "Home", "/" %>
+  </div>
+  <div class="navbar-item-left">
     <% if user_signed_in? %>
-      <span>Welcome, <%= current_user.name %>!</span>
+      Welcome, <%= current_user.name %>!
     <% end %>
+  </div>
 
-    <!-- 右側：ログイン、サインアップ、ログアウトメニュー -->
+  <!-- 右側の要素 -->
+  <div class="navbar-item-right">
     <ul>
       <% if user_signed_in? %>
         <li>
@@ -43,8 +49,6 @@
     </ul>
   </div>
 </nav>
-
-<!-- メインコンテンツ -->
 <%= yield %>
 
 </body>
