@@ -1,2 +1,9 @@
 <h1>結果： <%= @elapsed_time %>秒</h1>
 <p><%= flash[:typing_notice] %></p>
+<% if @user_best_time %>
+  <p>ベストタイム： <%= @user_best_time %>秒</p>
+  <p>順位： <%= @user_rank %>位</p>
+<% end %>
+
+<%= link_to "もう一度挑戦する", typing_start_path,class:"standard-button"%>
+<%= link_to "ホームに戻る", typing_home_path,class:"standard-button"%>
