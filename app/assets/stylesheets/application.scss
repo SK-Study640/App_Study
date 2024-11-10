@@ -97,6 +97,46 @@
   background-color: #e0e0e0; /* フォーカス時の背景色 */
 }
 
+//　フォーム関連のスタイル
+.form-title{
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px; /* フォーム全体の幅を制限 */
+  margin: auto;
+}
+
+label {
+  font-weight: bold;
+  margin-top: 10px; /* ラベルと上の入力欄の間にスペースを追加 */
+  font-size: 14px;
+  color: #333;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 5px; /* ラベルと入力欄の間にスペースを追加 */
+  outline: none;
+  width: 100%;
+
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: #ff6600; /* フォーカス時にオレンジ色の枠線を表示 */
+  box-shadow: 0 0 5px rgba(255, 102, 0, 0.3); /* フォーカス時に薄いオレンジ色の影を表示 */
+}
+
+
 .standard-button {
   display: inline-block; /* ブロック表示にしてボタンのようにする */
   background-color: #333; /* ボタンの背景色 */
@@ -108,6 +148,7 @@
   font-size: 16px; /* テキストサイズ */
   text-align: center; /* テキストを中央揃え */
   cursor: pointer; /* ホバー時のカーソル */
+  margin-top: 15px;
 }
 
 /* ボタンにホバーしたときのスタイル */

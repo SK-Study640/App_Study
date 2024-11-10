@@ -17,7 +17,11 @@ Rails.application.routes.draw do
   get "typing/home"
   get "typing/start", to: "typing#start", as: "typing_start"
   get "typing/reset", to: "typing#reset", as: "typing_reset"
-  post 'typing/check_answer', to: 'typing#check_answer'
+  post "typing/check_answer", to: "typing#check_answer"
   get "typing/result"
   get "typing/play"
+
+  namespace :admin do
+    resources :users, only: [:index, :edit, :update]
+  end
 end
