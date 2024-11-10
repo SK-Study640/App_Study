@@ -13,4 +13,11 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "home#index"
+
+  get "typing/home"
+  get "typing/start", to: "typing#start", as: "typing_start"
+  get "typing/reset", to: "typing#reset", as: "typing_reset"
+  post 'typing/check_answer', to: 'typing#check_answer'
+  get "typing/result"
+  get "typing/play"
 end

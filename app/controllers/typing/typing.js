@@ -1,0 +1,1 @@
+domument.getElementById("content").innerHTML = ""

@@ -1,0 +1,27 @@
+<div class="function-container">
+  <%= link_to "Play", typing_start_path %>
+</div>
+<div class="function-container typing">
+  <div>
+    <table>
+      <caption>Typing Results</caption>
+      <thead>
+        <tr>
+            <th scope="col">Rank</th>
+            <th scope="col">Name</th>
+            <th scope="col">Time</th>
+        </tr>
+      </thead>
+      <tbody>
+          <% @results.each_with_index do |result, index| %>
+            <tr>
+              <th scope="row"><%= index + 1 %></th>
+              <td><%= result.user.name %></td>
+              <td><%= result.time %> seconds</td>
+            </tr>
+          <% end %>
+      </tbody>
+
+    </table>
+  </div>
+</div>

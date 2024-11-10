@@ -1,0 +1,2 @@
+module Typing::SentencesHelper
+end
