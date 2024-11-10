@@ -49,6 +49,13 @@
     </ul>
   </div>
 </nav>
+<div>
+  <% if flash[:notice] %>
+    <p style="color: green;"><%= flash[:notice] %></p>
+  <% elsif flash[:alert] %>
+    <p style="color: red;"><%= flash[:alert] %></p>
+  <% end %>
+</div>
 <%= yield %>
 
 </body>

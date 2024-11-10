@@ -1,0 +1,37 @@
+<div class="typing-container">
+  <!-- タイピングの問題文 -->
+  <div class="typing-problem">
+    <p id="problem-text"><%= @sentence.content %></p>
+  </div>
+
+  <!-- フォーム -->
+  <div class="typing-input">
+    <%= form_with url: typing_check_answer_path, method: :post, local: true do |form| %>
+      <!-- ユーザーの回答入力 -->
+      <%= form.hidden_field :sentence_id, value: @sentence.id %>
+      <%= form.text_field :user_input, placeholder: "ここに入力してください", autofocus: true %>
+
+      <!-- 送信ボタン -->
+      <%= form.submit "Enter", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
+  <!-- 結果表示 -->
+  <div class="typing-feedback">
+    <% if flash[:typing_notice] %>
+      <p style="color: green;"><%= flash[:typing_notice] %></p>
+    <% elsif flash[:typing_alert] %>
+      <p style="color: red;"><%= flash[:typing_alert] %></p>
+    <% end %>
+  </div>
+
+  <!-- タイピング終了時のメッセージやタイム表示 -->
+  <div class="typing-result">
+    <% if @elapsed_time %>
+      <p>経過時間: <span id="elapsed-time"><%= @elapsed_time.round(2) %></span> 秒</p>
+    <% end %>
+    <p>正解数: <span id="correct-count"><%= @correct_count %></span> 回</p>
+
+    <%= link_to "もう一度プレイする", typing_play_path, class: "btn btn-secondary" %>
+  </div>
+</div>
