@@ -10,8 +10,9 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
-    if @user.update(user_params)
-      redirect_to admin_users_path, notice: "ユーザー情報を更新しました"
+      user_params_filtered = user_params.reject { |k, v| v.blank? } # 空の値は更新対象から除外
+    if @user.update(user_params_filtered)
+        redirect_to admin_users_path, notice: "ユーザー情報を更新しました"
     else
       render "edit"
     end
