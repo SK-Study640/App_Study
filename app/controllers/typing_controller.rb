@@ -44,5 +44,7 @@ class TypingController < ApplicationController
     else
       flash[:typing_notice] = "タイムは更新されませんでした"
     end
+    @user_best_time = Typing::Result.user_best_time(current_user)
+    @user_rank = Typing::Result.user_rank(current_user)
   end
 end

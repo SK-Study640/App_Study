@@ -97,6 +97,25 @@
   background-color: #e0e0e0; /* フォーカス時の背景色 */
 }
 
+.standard-button {
+  display: inline-block; /* ブロック表示にしてボタンのようにする */
+  background-color: #333; /* ボタンの背景色 */
+  color: white; /* テキストの色 */
+  padding: 10px 20px; /* 内側の余白 */
+  border: none; /* ボーダーなし */
+  border-radius: 12px; /* 角を丸く */
+  text-decoration: none; /* 下線を消す */
+  font-size: 16px; /* テキストサイズ */
+  text-align: center; /* テキストを中央揃え */
+  cursor: pointer; /* ホバー時のカーソル */
+}
+
+/* ボタンにホバーしたときのスタイル */
+.standard-button:hover {
+  background-color: #555; /* 背景色を少し明るく */
+}
+
+
 .typing thead, tfoot {
   background-color: #E4F0F5FF;
 }
