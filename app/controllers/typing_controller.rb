@@ -29,6 +29,7 @@ class TypingController < ApplicationController
       if session[:correct_count] >= 10
         redirect_to action: :result
         return
+        
       end
     else
       # 不正解の場合
@@ -44,7 +45,7 @@ class TypingController < ApplicationController
     else
       flash[:typing_notice] = "タイムは更新されませんでした"
     end
-    @user_best_time = Typing::Result.user_best_time(current_user)
-    @user_rank = Typing::Result.user_rank(current_user)
+    @user_best_time = current_user.typing_best_time
+    @user_rank = current_user.typing_rank
   end
 end
