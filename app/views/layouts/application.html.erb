@@ -60,6 +60,8 @@
     <p style="color: green;"><%= flash[:notice] %></p>
   <% elsif flash[:alert] %>
     <p style="color: red;"><%= flash[:alert] %></p>
+  <% elsif flash[:error] %>
+    <p style="color: red;"><%= flash[:error] %></p>
   <% end %>
 </div>
 <%= yield %>
