@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_10_073116) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_24_031116) do
+  create_table "typing_game_ids", force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "typing_progresses", force: :cascade do |t|
+    t.integer "game_id"
+    t.integer "success_count"
+    t.integer "error_count"
+    t.integer "elapsed_time"
+    t.integer "user_id"
+    t.text "sentence_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "typing_results", force: :cascade do |t|
     t.integer "time"
     t.integer "user_id", null: false
