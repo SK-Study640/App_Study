@@ -27,4 +27,9 @@ class Typing::Game < ApplicationRecord
       end
       elapsed_time
     end
+
+    # 対象ゲームの成功数を返すクラスメソッド
+    def get_success_count
+      Typing::Progress.where(game_id: self.id, is_success: true).count()
+    end
 end
