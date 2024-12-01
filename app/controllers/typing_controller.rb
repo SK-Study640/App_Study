@@ -9,31 +9,31 @@ class TypingController < ApplicationController
   end
 
   def start
-    session[:game_id] = Typing::Game.create_game_id(current_user.id)
-    redirect_to action: :play
+    game_id = Typing::Game.create_game_id(current_user.id)
+    redirect_to typing_play_path(game_id)
   end
 
   def play
-    geme = Typing::Game.find_by(id: session[:game_id])
+    @game = Typing::Game.find_by(id: params[:game_id])
     # nilチェックを追加（該当するレコードがない場合の対応）
-    if geme.nil?
+    if @game.nil?
       flash[:error] = 'ゲーム開始に失敗しました'
       redirect_to root_path and return
     end
 
     session[:start_time] = Time.now.iso8601
     @sentence = Typing::Sentence.order('RANDOM()').first
-    @elapsed_time = geme.get_elapsed_time
-    @current_progress = geme.get_current_progress
-    @correct_count = geme.get_success_count
+    @elapsed_time = @game.get_elapsed_time
+    @current_progress = @game.get_current_progress
+    @correct_count = @game.get_success_count
   end
 
   def check_answer
     @sentence = Typing::Sentence.find(params[:sentence_id])
-    game_id = Typing::Game.find_by(id: session[:game_id])
-    success_count = game_id.get_success_count
+    @game = Typing::Game.find_by(id: params[:game_id])
+    success_count = @game.get_success_count
 
-    @current_progress = Typing::Progress.initialize_progress(game_id: session[:game_id], user_id: current_user.id,
+    @current_progress = Typing::Progress.initialize_progress(game_id: @game.id, user_id: current_user.id,
                                                              sentence_id: @sentence.id, elapsed_time: Time.zone.now - Time.iso8601(session[:start_time]))
 
     if @sentence.content == params[:user_input]
@@ -50,16 +50,16 @@ class TypingController < ApplicationController
 
     #  10回以上正解したら結果画面へ
     if success_count >= 10
-      redirect_to action: :result
+      redirect_to typing_result_path(@game.id)
       return
 
     end
-    redirect_to action: :play
+    redirect_to typing_play_path(@game.id)
   end
 
   def result
-    game = Typing::Game.find_by(id: session[:game_id])
-    @elapsed_time = game.get_elapsed_time
+    @game = Typing::Game.find_by(id: params[:game_id])
+    @elapsed_time = @game.get_elapsed_time
     flash[:typing_notice] = if Typing::Result.create_or_update(current_user, @elapsed_time)
                               'ベストタイムを更新しました'
                             else

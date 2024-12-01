@@ -19,9 +19,9 @@ Rails.application.routes.draw do
   get 'typing/home'
   get 'typing/start', to: 'typing#start', as: 'typing_start'
   get 'typing/reset', to: 'typing#reset', as: 'typing_reset'
-  post 'typing/check_answer', to: 'typing#check_answer'
-  get 'typing/result'
-  get 'typing/play'
+  post 'typing/check_answer/:game_id', to: 'typing#check_answer', as: 'typing_check_answer'
+  get 'typing/result/:game_id', to: 'typing#result', as: 'typing_result'
+  get 'typing/play/:game_id', to: 'typing#play', as: 'typing_play'
 
   namespace :admin do
     resources :users, only: %i[index edit update]
