@@ -30,6 +30,11 @@ gem "bootsnap", require: false
 
 gem "devise"
 gem "sassc-rails"
+gem "rubocop", require: false
+
+
+
+
 
 
 group :development, :test do
