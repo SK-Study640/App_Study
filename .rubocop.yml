@@ -1,5 +1,6 @@
 AllCops:
   NewCops: enable
   Exclude:
-    - 'db//**/*'
+    - 'db/**/*'
+    - 'bin//**/*'
     - 'node_modules/**/*'
