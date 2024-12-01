@@ -1,6 +1,5 @@
 AllCops:
   NewCops: enable
   Exclude:
-    - 'db/schema.rb'
-    - 'db/seeds.rb'
+    - 'db//**/*'
     - 'node_modules/**/*'
