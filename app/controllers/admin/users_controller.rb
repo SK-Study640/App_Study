@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Admin
+  # ユーザー用コントローラクラス
   class UsersController < ApplicationController
     before_action :set_user, only: %i[edit update]
     before_action :admin_user
@@ -12,7 +13,7 @@ module Admin
     def edit; end
 
     def update
-      user_params_filtered = user_params.reject { |_k, v| v.blank? } # 空の値は更新対象から除外
+      user_params_filtered = user_params.compact_blank # 空の値は更新対象から除外
       if @user.update(user_params_filtered)
         redirect_to admin_users_path, notice: 'ユーザー情報を更新しました'
       else

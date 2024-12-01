@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 module Typing
+  # ゲームIDを保持するモデル
   class Game < ApplicationRecord
-    belongs_to :user, foreign_key: :user_id
+    belongs_to :user
+    
 
     # ゲームIDを作成して、作成したIDを返すクラスメソッド
     # 作成に失敗した場合は例外に投げる

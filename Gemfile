@@ -32,6 +32,8 @@ gem 'bootsnap', require: false
 
 gem 'devise'
 gem 'rubocop', require: false
+gem 'rubocop-capybara'
+gem 'rubocop-rails'
 gem 'sassc-rails'
 
 group :development, :test do
@@ -43,6 +45,7 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem 'rubocop-rails-omakase', require: false
+
 end
 
 group :development do
@@ -55,3 +58,5 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
 end
+
+gem 'annotate', '~> 3.2', group: :development

@@ -1,10 +1,15 @@
 # frozen_string_literal: true
 
 module Typing
+  # ゲームの進捗度を保持するモデル
+  # Association
+  # - belong_to :game
+  # - belong_to :user
+  # - belong_to :sentence
   class Progress < ApplicationRecord
-    belongs_to :game, foreign_key: :game_id
-    belongs_to :user, foreign_key: :user_id
-    belongs_to :sentence, foreign_key: :sentence_id
+    belong_to :game
+    belong_to :user
+    belong_to :sentence
 
     # 初期化メソッド
     def self.initialize_progress(game_id:, user_id:, sentence_id:, elapsed_time:)

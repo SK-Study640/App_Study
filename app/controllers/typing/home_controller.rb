@@ -9,10 +9,10 @@ module Typing
     def play
       # 初期化（1回目アクセス時）
       session[:correct_count] ||= 0
-      session[:start_time] ||= Time.now
+      session[:start_time] ||= Time.zone.now
 
       # 経過時間の計算
-      @elapsed_time = Time.now - Time.parse(session[:start_time].to_s)
+      @elapsed_time = Time.zone.now - Time.zone.parse(session[:start_time].to_s)
 
       # 正解回数のチェック（10回に達したら終了画面へ）
       if session[:correct_count] >= 10

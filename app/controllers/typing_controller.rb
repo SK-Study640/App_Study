@@ -34,7 +34,7 @@ class TypingController < ApplicationController
     success_count = game_id.get_success_count
 
     @current_progress = Typing::Progress.initialize_progress(game_id: session[:game_id], user_id: current_user.id,
-                                                             sentence_id: @sentence.id, elapsed_time: Time.now - Time.iso8601(session[:start_time]))
+                                                             sentence_id: @sentence.id, elapsed_time: Time.zone.now - Time.iso8601(session[:start_time]))
 
     if @sentence.content == params[:user_input]
       # 正解の場合
