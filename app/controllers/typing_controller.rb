@@ -60,7 +60,9 @@ class TypingController < ApplicationController
   def result
     @game = Typing::Game.find_by(id: params[:game_id])
     @elapsed_time = @game.get_elapsed_time
-    flash[:typing_notice] = if Typing::Result.create_or_update(current_user, @elapsed_time)
+    best_result = current_user.typing_best_time
+    Typing::Result.create!(time: @elapsed_time, user_id: current_user.id)
+    flash[:typing_notice] = if best_result.nil? || @elapsed_time < best_result
                               'ベストタイムを更新しました'
                             else
                               'タイムは更新されませんでした'
