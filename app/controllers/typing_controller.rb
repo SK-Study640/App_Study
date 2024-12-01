@@ -60,14 +60,14 @@ class TypingController < ApplicationController
   def result
     @game = Typing::Game.find_by(id: params[:game_id])
     @elapsed_time = @game.get_elapsed_time
-    best_result = current_user.typing_best_time
     Typing::Result.create!(time: @elapsed_time, user_id: current_user.id)
-    flash[:typing_notice] = if best_result.nil? || @elapsed_time < best_result
+    @user_best_time = current_user.result.order(time: :asc).first&.time
+    flash[:typing_notice] = if @elapsed_time == @user_best_time
                               'ベストタイムを更新しました'
                             else
                               'タイムは更新されませんでした'
                             end
-    @user_best_time = current_user.typing_best_time
-    @user_rank = current_user.typing_rank
+    # 自身の結果秒数よりも良い結果の数+1を自身の順位とする
+    @user_rank = Typing::Result.where(time: @user_best_time).count + 1
   end
 end
