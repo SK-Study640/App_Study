@@ -3,6 +3,8 @@
 class TypingController < ApplicationController
   require 'time'
   INCREMENT_SUCCESS_AND_ERROR_COUNT = 1
+  # 最大正答数
+  MAX_CORRECT_ANSWERS = 10
 
   def home
     @results = Typing::Result.order(time: :asc)
@@ -49,10 +51,14 @@ class TypingController < ApplicationController
     @current_progress.save!
 
     #  10回以上正解したら結果画面へ
-    if success_count >= 10
+    if success_count == MAX_CORRECT_ANSWERS
       redirect_to typing_result_path(@game.id)
       return
-
+    # 正解数が11以上の場合はエラーとしてホーム画面に返す
+    elsif success_count > MAX_CORRECT_ANSWERS
+      flash[:error] = 'システムエラーのため、ホーム画面に遷移しました'
+      Rails.logger.error('システムエラー: 正答数が11以上')
+      redirect_to home_path
     end
     redirect_to typing_play_path(@game.id)
   end
