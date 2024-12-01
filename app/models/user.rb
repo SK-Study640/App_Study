@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  has_many :result, dependent: :destroy, class_name: "Typing::Result"
+  has_many :result, dependent: :destroy, class_name: 'Typing::Result'
   enum role: { general: 0, admin: 1 }
 
   # 順位計算時のデフォルト加算値
@@ -20,6 +22,6 @@ class User < ApplicationRecord
     return nil unless best_time
 
     # 自身より良いタイムの数+1を自身の順位とする
-    Typing::Result.where("time < ?", best_time).count + DEFAULT_RANK_INCREMENT
+    Typing::Result.where('time < ?', best_time).count + DEFAULT_RANK_INCREMENT
   end
 end

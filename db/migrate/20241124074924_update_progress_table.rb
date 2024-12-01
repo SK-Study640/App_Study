@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UpdateProgressTable < ActiveRecord::Migration[7.2]
   def change
     # success_countとerror_countを削除
