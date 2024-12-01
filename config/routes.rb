@@ -22,6 +22,6 @@ Rails.application.routes.draw do
   get "typing/play"
 
   namespace :admin do
-    resources :users, only: [:index, :edit, :update]
+    resources :users, only: [ :index, :edit, :update ]
   end
 end

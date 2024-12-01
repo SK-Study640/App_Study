@@ -20,7 +20,6 @@ class User < ApplicationRecord
     return nil unless best_time
 
     # 自身より良いタイムの数+1を自身の順位とする
-    return Typing::Result.where("time < ?", best_time).count + DEFAULT_RANK_INCREMENT
-    
+    Typing::Result.where("time < ?", best_time).count + DEFAULT_RANK_INCREMENT
   end
 end
