@@ -26,12 +26,6 @@ class TypingController < ApplicationController
     @correct_count = geme.get_success_count
   end
 
-
-
-
-
-
-
   def check_answer
     @sentence = Typing::Sentence.find(params[:sentence_id])
     game_id = Typing::Game.find_by(id: session[:game_id])
