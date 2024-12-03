@@ -18,22 +18,22 @@ class TypingController < ApplicationController
   def play
     @game = Typing::Game.find_by(id: params[:game_id])
     # nilチェックを追加（該当するレコードがない場合の対応）
-    if @game.nil?
+    if @game
       flash[:error] = 'ゲーム開始に失敗しました'
       redirect_to root_path and return
     end
 
     session[:start_time] = Time.now.iso8601
     @sentence = Typing::Sentence.order('RANDOM()').first
-    @elapsed_time = @game.get_elapsed_time
-    @current_progress = @game.get_current_progress
-    @correct_count = @game.get_success_count
+    @elapsed_time = @game.elapsed_time
+    @current_progress = @game.current_progress
+    @correct_count = @game.success_count
   end
 
   def check_answer
     @sentence = Typing::Sentence.find(params[:sentence_id])
     @game = Typing::Game.find_by(id: params[:game_id])
-    success_count = @game.get_success_count
+    success_count = @game.success_count
 
     @current_progress = Typing::Progress.initialize_progress(game_id: @game.id, user_id: current_user.id,
                                                              sentence_id: @sentence.id, elapsed_time: Time.zone.now - Time.iso8601(session[:start_time]))
@@ -65,7 +65,7 @@ class TypingController < ApplicationController
 
   def result
     @game = Typing::Game.find_by(id: params[:game_id])
-    @elapsed_time = @game.get_elapsed_time
+    @elapsed_time = @game.elapsed_time
     Typing::Result.create!(time: @elapsed_time, user_id: current_user.id)
     @user_best_time = current_user.result.order(time: :asc).first&.time
     flash[:typing_notice] = if @elapsed_time == @user_best_time

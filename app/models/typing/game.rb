@@ -16,12 +16,12 @@ module Typing
     end
 
     # 現在の最新の途中経過を取得するクラスメソッド
-    def get_current_progress
+    def current_progress
       Typing::Progress.where(game_id: id).order(id: :desc).first
     end
 
     # 対象ゲームの経過時間を返すクラスメソッド
-    def get_elapsed_time
+    def elapsed_time
       elapsed_time = 0
       elapsed_times = Typing::Progress.where(game_id: id).pluck(:elapsed_time)
       elapsed_times.each do |i|
@@ -31,7 +31,7 @@ module Typing
     end
 
     # 対象ゲームの成功数を返すクラスメソッド
-    def get_success_count
+    def success_count
       Typing::Progress.where(game_id: id, is_success: true).count
     end
   end
